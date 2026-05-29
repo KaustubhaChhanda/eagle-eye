@@ -29,3 +29,5 @@ curl -X POST http://localhost:3000/api/analyze -F "image=@/path/to/photo.jpg"
 
 Notes
 - The project uses `@google/generative-ai` SDK to call Gemini. Ensure your SDK usage matches the installed package version — the SDK surface can change, and you may need to adapt `src/services/geminiService.js` accordingly.
+
+This project is not completed yet...
