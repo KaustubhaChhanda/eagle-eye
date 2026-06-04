@@ -5,7 +5,7 @@ const router = express.Router();
 
 const upload = require('../middleware/upload');
 const { extractExif } = require('../services/exifService');
-const { analyzeWithGemini } = require('../services/geminiService');
+const { analyzeWithHuggingFace } = require('../services/huggingFaceService');
 const { reconcile } = require('../services/locationMatcher');
 
 router.post('/analyze', upload.single('image'), async (req, res) => {
@@ -15,7 +15,7 @@ router.post('/analyze', upload.single('image'), async (req, res) => {
 
   // Run EXIF and Gemini in parallel; tolerate partial failures
   const exifP = extractExif(filePath).catch(err => ({ error: err }));
-  const aiP = analyzeWithGemini(filePath).catch(err => ({ error: err }));
+  const aiP = analyzeWithHuggingFace(filePath).catch(err => ({ error: err }));
 
   const [exifRes, aiRes] = await Promise.all([exifP, aiP]);
 
